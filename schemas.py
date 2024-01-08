@@ -3,7 +3,7 @@ from marshmallow import Schema, fields
 
 class PlainUserSchema(Schema):
     id = fields.Int(dump_only=True)
-    name = fields.String(required=True)
+    username = fields.String(required=True)
     phone = fields.String(required=True)
     email = fields.String(required=True)
     password = fields.String(required=True, load_only=True)
@@ -13,7 +13,7 @@ class PlainProductSchema(Schema):
     id = fields.Int(dump_only=True)
     name = fields.String(required=True)
     price = fields.Float(required=True)
-    items_count = fields.Int(required=True)
+    count = fields.Int(required=True)
 
 
 class UserSchema(PlainUserSchema):
@@ -28,5 +28,5 @@ class ProductSchema(PlainProductSchema):
 class ProductUpdateSchema(Schema):
     name = fields.Str()
     price = fields.Float()
-    items_count = fields.Int(required=True)
-    user_id = fields.Int(required=False)
+    count = fields.Int(required=False)
+    user_id = fields.Int(required=True)

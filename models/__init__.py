@@ -1,2 +1,5 @@
-from product import ProductModel
-from user import UserModel
+
+
+from models.product import ProductModel
+from models.user import UserModel
+

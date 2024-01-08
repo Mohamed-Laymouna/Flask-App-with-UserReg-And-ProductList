@@ -7,6 +7,7 @@ class ProductModel(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
     price = db.Column(db.Float, nullable=False)
-    items_count = db.Column(db.Integer, nullable=False)
-    owner_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-    owner = db.relationship("User", back_populates="products")
+    count = db.Column(db.Integer, nullable=False)
+
+    user_id = db.Column(db.Integer, db.ForeignKey("users.id"), unique=False, nullable=False)
+    owner = db.relationship("UserModel", back_populates="products")
