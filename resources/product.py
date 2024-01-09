@@ -2,6 +2,7 @@ from flask.views import MethodView
 from flask_smorest import Blueprint, abort
 
 from sqlalchemy.exc import SQLAlchemyError
+from flask_jwt_extended import jwt_required
 
 from db import db
 from models import ProductModel
@@ -12,15 +13,13 @@ blp = Blueprint("Products", __name__, description="Operations on items")
 
 @blp.route("/product")
 class ItemList(MethodView):
-
-    #@jwt_required(fresh=True)
+    @jwt_required()
     @blp.arguments(ProductSchema)
     @blp.response(201, ProductSchema)
     def post(self, product_data):
         """Create new item"""
 
         product = ProductModel(**product_data)
-
         try:
             db.session.add(product)
             db.session.commit()
@@ -29,7 +28,7 @@ class ItemList(MethodView):
 
         return product
 
-    #@jwt_required()
+    @jwt_required()
     @blp.response(200, ProductSchema(many=True))
     def get(self):
         """get products list"""
@@ -38,14 +37,14 @@ class ItemList(MethodView):
 
 @blp.route("/product/<string:product_id>")
 class Item(MethodView):
-    #@jwt_required()
+    @jwt_required()
     @blp.response(200, ProductSchema)
     def get(self, product_id):
         """get product by ID"""
         product = ProductModel.query.get_or_404(product_id)
         return product
 
-    #@jwt_required()
+    @jwt_required()
     def delete(self, product_id):
         """delete product by ID"""
         product = ProductModel.query.get_or_404(product_id)
@@ -53,6 +52,7 @@ class Item(MethodView):
         db.session.commit()
         return {"message": "product deleted."}
 
+    @jwt_required()
     @blp.arguments(ProductUpdateSchema)
     @blp.response(200, ProductSchema)
     def put(self, product_data, product_id):
