@@ -11,3 +11,5 @@ class ProductModel(db.Model):
 
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"), unique=False, nullable=False)
     owner = db.relationship("UserModel", back_populates="products")
+
+    reviews = db.relationship("ReviewModel", back_populates="product", lazy="dynamic")

@@ -8,7 +8,7 @@ from db import db
 from models import ProductModel
 from schemas import ProductSchema, ProductUpdateSchema
 
-blp = Blueprint("Products", __name__, description="Operations on items")
+blp = Blueprint("Products", __name__, description="Operations on products")
 
 
 @blp.route("/product")

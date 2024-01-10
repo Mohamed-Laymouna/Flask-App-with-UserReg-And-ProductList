@@ -9,6 +9,7 @@ from blocklist import BLOCKLIST
 
 from resources.user import blp as UserBlueprint
 from resources.product import blp as ProductBlueprint
+from resources.review import blp as ReviewBlueprint
 
 
 def create_app(db_url=None):
@@ -24,6 +25,7 @@ def create_app(db_url=None):
     ] = "https://cdn.jsdelivr.net/npm/swagger-ui-dist/"
     app.config["SQLALCHEMY_DATABASE_URI"] = db_url or os.getenv("DATABASE_URL", "sqlite:///data.db")
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+    app.config['DEBUG'] = True
 
     db.init_app(app)
 
@@ -50,5 +52,6 @@ def create_app(db_url=None):
 
     api.register_blueprint(ProductBlueprint)
     api.register_blueprint(UserBlueprint)
+    api.register_blueprint(ReviewBlueprint)
 
     return app
