@@ -127,7 +127,8 @@ class User(MethodView):
         else:
             abort(404, message="User not found")
 
-    def delete(self, user_id):
+    @staticmethod
+    def delete(user_id):
         """Delete user by id"""
 
         user = UserModel.query.get(user_id)
