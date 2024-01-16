@@ -7,6 +7,7 @@ class PlainUserSchema(Schema):
     phone = fields.String(required=True)
     email = fields.String(required=True)
     password = fields.String(required=True, load_only=True)
+    is_verified = fields.Boolean(dump_only=True)
 
 
 class PlainProductSchema(Schema):
@@ -26,6 +27,10 @@ class PlainReviewSchema(Schema):
 class UserSchema(PlainUserSchema):
     products = fields.List(fields.Nested(PlainProductSchema()), dump_only=True)
     reviews = fields.List(fields.Nested(PlainReviewSchema()), dump_only=True)
+
+
+class UserEmailVerificationSchema(Schema):
+    email = fields.String(required=True)
 
 
 class ProductSchema(PlainProductSchema):
