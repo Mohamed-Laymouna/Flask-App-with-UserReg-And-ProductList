@@ -14,3 +14,13 @@ class UserModel(db.Model):
     products = db.relationship("ProductModel", back_populates="owner", lazy="dynamic")
 
     reviews = db.relationship("ReviewModel", back_populates="user", lazy="dynamic")
+    
+    
+    cart = db.relationship('CartModel', backref='user', uselist=False, cascade='all, delete-orphan', lazy=False)
+
+
+    
+    
+
+    
+    

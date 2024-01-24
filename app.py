@@ -12,6 +12,7 @@ from blocklist import BLOCKLIST
 from resources.user import blp as UserBlueprint
 from resources.product import blp as ProductBlueprint
 from resources.review import blp as ReviewBlueprint
+from resources.cart import blp as CartBlueprint
 
 
 def create_app(db_url=None):
@@ -57,5 +58,7 @@ def create_app(db_url=None):
     api.register_blueprint(ProductBlueprint)
     api.register_blueprint(UserBlueprint)
     api.register_blueprint(ReviewBlueprint)
+    api.register_blueprint(CartBlueprint)
+    
 
     return app

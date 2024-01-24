@@ -44,5 +44,3 @@ class ReviewById(MethodView):
         db.session.delete(review)
         db.session.commit()
         return {"message": "review deleted."}
-
-
